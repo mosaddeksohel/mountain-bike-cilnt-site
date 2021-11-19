@@ -17,7 +17,7 @@ const Carusel = () => {
                 />
                 <Carousel.Caption>
                     <Link to='/explore'><Button>Explore</Button></Link>
-                    <p>Let's ride to see the world</p>
+                    <h5 style={{ color: 'skyblue' }}>Let's ride to see the world</h5>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -28,7 +28,7 @@ const Carusel = () => {
                 />
                 <Carousel.Caption>
                     <Link to='/explore'><Button>Explore</Button></Link>
-                    <h4>We are ready to ride anywhere.</h4>
+                    <h5 style={{ color: 'skyblue' }}>We are ready to ride anywhere.</h5>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -39,10 +39,10 @@ const Carusel = () => {
                 />
                 <Carousel.Caption>
                     <Link to='/explore'><Button>Explore</Button></Link>
-                    <h4>Join with us to enjoy the world.</h4>
+                    <h5 style={{ color: 'skyblue' }}>Join with us to enjoy the world.</h5>
                 </Carousel.Caption>
             </Carousel.Item>
-        </Carousel>
+        </Carousel >
 
     );
 };

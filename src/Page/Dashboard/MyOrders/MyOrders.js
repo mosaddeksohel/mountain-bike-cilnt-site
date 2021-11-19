@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
+import Button from '@mui/material/Button';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import useAuth from '../../../Hook/useAuth';
+import { Typography } from '@material-ui/core';
 
 const MyOrders = () => {
     const { user } = useAuth();
@@ -14,24 +16,63 @@ const MyOrders = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/orders/${user?.email}`
+        const url = `https://warm-tor-69858.herokuapp.com/orders?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             // .then(data => console.log(data))
             .then(data => setOrders(data))
-    }, [user?.email])
+    }, [])
 
+    /* const handleDeleteOrder = id => {
+        const url = `https://warm-tor-69858.herokuapp.com/orders/${user.email}/${id}`;
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                 console.log(data)
+                if (data.deletedCount) {
+                    const remaining = orders.filter(orders => orders._id !== id);
+                    setOrders(remaining)
+                }
+            })
+    };*/
+    const cancelOrder = id => {
+        const proceed = window.confirm('Are you sure, you want to delete?');
+        if (proceed) {
+            const url = `https://warm-tor-69858.herokuapp.com/deleteOrder/${id}`
+            fetch(url, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.deletedCount) {
+                        alert('Order cancel successfully')
+                        const remain = orders.filter(order => order._id !== id)
+                        setOrders(remain);
+                    }
+
+                })
+        }
+
+    }
 
     return (
         <div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: '50%' }} aria-label="Ordered List">
                     <TableHead>
+                        <Typography sx={{ textAlign: 'center' }}>
+                            <h2>Orders List</h2>
+                        </Typography>
                         <TableRow>
                             <TableCell>Name</TableCell>
-                            <TableCell align="right">Item Name</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} align="right">Item Name</TableCell>
                             <TableCell align="right">Price</TableCell>
                             <TableCell align="right">Address</TableCell>
+                            <TableCell align="right">Status</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} align="right">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -43,15 +84,18 @@ const MyOrders = () => {
                                 <TableCell component="th" scope="row">
                                     {row.customerName}
                                 </TableCell>
-                                <TableCell align="right">{row.orderName}</TableCell>
+                                <TableCell sx={{ textAlign: 'center' }} align="right">{row.orderName}</TableCell>
                                 <TableCell align="right">{row.price}</TableCell>
                                 <TableCell align="right">{row.address}</TableCell>
+                                <TableCell align="right">{row.status}</TableCell>
+                                <TableCell sx={{ textAlign: 'center' }} align="right">
+                                    <Button onClick={() => cancelOrder(row._id)}>Delete</Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-
         </div >
     );
 };

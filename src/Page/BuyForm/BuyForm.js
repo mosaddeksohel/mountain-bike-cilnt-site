@@ -45,7 +45,7 @@ const BuyForm = ({ open, handleClose, product }) => {
             orderName: name
         }
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://warm-tor-69858.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

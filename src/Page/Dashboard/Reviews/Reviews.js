@@ -9,10 +9,10 @@ const ReviewUser = () => {
     const onSubmit = data => {
         console.log(data);
 
-        axios.post('http://localhost:5000/ratting', data)
+        axios.post('https://warm-tor-69858.herokuapp.com/ratting', data)
             .then(res => {
                 if (res.data.insertedId) {
-                    alert('Product Added Successfully');
+                    alert('Successfully Review');
                     reset();
                 }
             })
@@ -23,10 +23,10 @@ const ReviewUser = () => {
             <div className="w-50 mx-auto shadow-lg p-3 mb-5 bg-white rounded py-5">
                 <h2 className="mb-4 text-primary"> Add Your Valuable Ratting </h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    {/* <input {...register("img")} placeholder="Your Photo URL" className="w-75 form-control mx-auto" /> <br /> */}
+                    <input {...register("img")} placeholder="Your Photo URL" className="w-75 form-control mx-auto" /> <br />
                     <input {...register("name")} defaultValue={user.displayName} placeholder="Your Name" className="w-75 form-control mx-auto" /> <br />
 
-                    <input type="number" {...register("rating")} placeholder="Type Ratting Number 1-5" className="w-75 form-control mx-auto" /> <br />
+                    <input type="number" {...register("price")} placeholder="Type Ratting Number 1-5" className="w-75 form-control mx-auto" /> <br />
 
                     <textarea {...register("describe")} placeholder="Description" className="w-75 form-control mx-auto addProductTextarea" /> <br />
 

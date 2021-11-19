@@ -6,7 +6,7 @@ const RattingSlider = () => {
     const [ratting, setRatting] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/ratting')
+        fetch('https://warm-tor-69858.herokuapp.com/ratting')
             .then(res => res.json())
             // .then(data => console.log(data))
             .then(data => setRatting(data))

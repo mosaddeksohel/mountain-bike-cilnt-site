@@ -11,7 +11,7 @@ const Purchase = () => {
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${productId}`)
+        fetch(`https://warm-tor-69858.herokuapp.com/products/${productId}`)
             .then(res => res.json())
             // .then(data => console.log(data))
             .then(data => setProducts(data))

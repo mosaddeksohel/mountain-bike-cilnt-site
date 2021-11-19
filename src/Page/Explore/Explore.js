@@ -5,7 +5,7 @@ import Product from '../Product/Product';
 const Explore = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://warm-tor-69858.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -13,16 +13,18 @@ const Explore = () => {
         <div>
             <Navigation></Navigation>
             <h2>Our Products</h2>
-            <div className="container mx-auto">
-                <>
-                    {
-                        products.map(product => <Product
-                            key={product._id}
-                            product={product}
-                        ></Product>)
-                    }
-                </>
+            <div className="container">
+                <div className="mx-auto item">
+                    <>
+                        {
+                            products.map(product => <Product
+                                key={product._id}
+                                product={product}
+                            ></Product>)
+                        }
+                    </>
 
+                </div>
             </div>
         </div>
     );

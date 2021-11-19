@@ -5,32 +5,75 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../Hook/useAuth';
 
 const ManageOrders = () => {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
     const [orders, setOrders] = useState([]);
 
-    const productShipped = e => {
-
-        e.preventDefult();
-    }
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user.email}`)
+        fetch(`https://warm-tor-69858.herokuapp.com/allOrders`)
             .then(res => res.json())
             // .then(data => console.log(data))
             .then(data => setOrders(data))
-    }, [user.email])
+    }, [])
+
+
+    const approvedOrder = id => {
+        const proceed = window.confirm('Are you sure, you want to delete?');
+        if (proceed) {
+            const url = `https://warm-tor-69858.herokuapp.com/modified/${id}`
+            fetch(url, {
+                method: "PUT"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        alert('Order Shipped')
+                        fetch(`https://warm-tor-69858.herokuapp.com/allOrders`)
+                            .then(res => res.json())
+                            // .then(data => console.log(data))
+                            .then(data => setOrders(data))
+                    }
+                })
+        }
+
+    }
+
+    const cancelOrder = id => {
+        const proceed = window.confirm('Are you sure, you want to delete?');
+        if (proceed) {
+            const url = `https://warm-tor-69858.herokuapp.com/deleteOrder/${id}`
+            fetch(url, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.deletedCount) {
+                        alert('Order cancel successfully')
+                        const remain = orders.filter(order => order._id !== id)
+                        setOrders(remain);
+                    }
+
+                })
+        }
+
+    }
+
     return (
         <div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: '50%' }} aria-label="Ordered List">
                     <TableHead>
+                        <h3 >Manage All Orders {orders.length}</h3>
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell align="right">Item Name</TableCell>
                             <TableCell align="right">Price</TableCell>
                             <TableCell align="right">Address</TableCell>
+                            <TableCell align="right">Status</TableCell>
                             <TableCell align="right">Shipping</TableCell>
+                            <TableCell align="right">Delete</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -45,14 +88,18 @@ const ManageOrders = () => {
                                 <TableCell align="right">{row.orderName}</TableCell>
                                 <TableCell align="right">{row.price}</TableCell>
                                 <TableCell align="right">{row.address}</TableCell>
-                                <TableCell align="right"><Button onClick={() => productShipped}></Button></TableCell>
+                                <TableCell align="right">{row.status}</TableCell>
+                                <TableCell align="right"><Button onClick={() => approvedOrder(row._id)}>Shipped</Button></TableCell>
+                                <TableCell align="right"><Button onClick={() => cancelOrder(row._id)}>Delete</Button></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
 
+
         </div >
+
     );
 };
 

@@ -57,7 +57,7 @@ const Login = () => {
                 <br />
 
                 <Button
-                    sx={{ width: '75%', m: 1 }}
+                    style={{ backgroundColor: 'goldenrod', width: '25%', marginBottom: 7, }}
                     type="submit"
                     variant="contained">Login
                 </Button>
@@ -67,6 +67,7 @@ const Login = () => {
                     <Link to="/register">
                         <Button
                             sx={{ width: '75%', m: 1 }}
+                            style={{ backgroundColor: 'skyblue' }}
                             variant="contained">Register
                         </Button>
                     </Link>

@@ -11,6 +11,7 @@ import AuthProvider from './Context/AuthProvider/AuthProvider';
 import PrivateRoute from './Page/PrivateRoute/PrivateRoute';
 import ManageProducts from './Page/Dashboard/ManageProducts/ManageProducts';
 import BuyForm from './Page/BuyForm/BuyForm';
+import OrderStatusUpdate from './components/StatusUpdate/StatusUpdate'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/register">
               <Register></Register>
             </Route>
+
             <Route path="/buyform">
               <BuyForm></BuyForm>
             </Route>

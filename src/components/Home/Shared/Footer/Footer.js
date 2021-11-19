@@ -42,7 +42,6 @@ const Footer = () => {
                     <div style={{ textAlign: 'left', marginLeft: '2rem', marginTop: '2rem' }}>
                         <h5>Let's Talk Bikes & Gear</h5>
                         <Button>CHAT WITY US</Button>
-                        <h5>Chat hours 9AM-6PM PST, Monday-Saturday</h5>
                         <h5>Trade In Your Bike</h5>
                         <h5>Follow Us</h5>
                     </div>

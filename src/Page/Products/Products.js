@@ -5,7 +5,7 @@ import Product from '../Product/Product';
 const Products = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://warm-tor-69858.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -13,7 +13,7 @@ const Products = () => {
         <div>
             <h2>Our Products</h2>
             <div className="mx-auto m-2">
-                <div className="productsItem">
+                <div className="productsItem container">
                     {
                         products.map(product => <Product
                             key={product._id}

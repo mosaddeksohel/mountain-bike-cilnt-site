@@ -6,25 +6,29 @@ const ManageProducts = () => {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://warm-tor-69858.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
 
     const handleDelete = id => {
-        const url = `http://localhost:5000/products/${id}`;
-        fetch(url, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.deletedCount) {
-                    const remaining = products.filter(product => product._id !== id);
-                    setProducts(remaining)
-                }
+        const proceed = window.confirm('Are you sure, you want to delete?');
+        if (proceed) {
+            const url = `https://warm-tor-69858.herokuapp.com/products/${id}`;
+            fetch(url, {
+                method: 'DELETE'
             })
-    }
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.deletedCount) {
+                        const remaining = products.filter(product => product._id !== id);
+                        setProducts(remaining)
+                    }
+                })
+        }
+    };
+
     return (
         <div>
             <h2 style={{ color: 'indianred' }}>Manage All Products</h2>

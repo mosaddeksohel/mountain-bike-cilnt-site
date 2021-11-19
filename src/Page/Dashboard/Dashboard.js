@@ -43,39 +43,48 @@ function Dashboard(props) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
+
     <NavLink></NavLink>
     const drawer = (
         <div >
             <Toolbar />
             <Divider />
-            {!admin ?
-                <Box >
-                    <Link to={`${url}`}><Button color="inherit">Dashboard</Button></Link>
-                    <br />
-                    <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link>
-                    <br />
-                    <Link to={`${url}/myorders`}><Button color="inherit">My Order</Button></Link>
-                    <br />
-                    <Link to={`${url}/reviews`}><Button color="inherit">Reviews</Button></Link>
-                    <br />
-                </Box>
 
-                : <Box>
-                    <Link to={`${url}/makeadmin`}><Button color="inherit">Make Admin</Button></Link>
+
+            {!admin &&
+                <Box sx={{ textAlign: 'left', marginLeft: 2, textDecoration: 'none' }}>
+
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/pay`}><Button style={{ backgroundColor: 'skyblue', color: 'black', marginBottom: 2 }} color="inherit">Pay</Button></Link>
                     <br />
-                    <Link to={`${url}/addproducts`}><Button color="inherit">Add Product</Button></Link>
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/myorders`}><Button style={{ backgroundColor: 'skyblue', color: 'black', marginBottom: 2 }} color="inherit"> My Order</Button></Link>
                     <br />
-                    <Link to={`${url}/manageproducts`}><Button color="inherit">Manage Products</Button></Link>
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/reviews`}><Button style={{ backgroundColor: 'skyblue', color: 'black', marginBottom: 2 }} color="inherit"> Reviews</Button></Link>
                     <br />
-                    <Link to={`${url}/manageallorders`}><Button color="inherit">Manage All Orders</Button></Link>
+                </Box>}
+
+
+            {admin &&
+                <Box sx={{ textAlign: 'left', marginLeft: 2 }}>
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/makeadmin`}><Button style={{ backgroundColor: 'skyblue', color: 'black', marginBottom: 2 }} color="inherit">Make Admin</Button></Link>
+                    <br />
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/addproducts`}><Button style={{ backgroundColor: 'skyblue', color: 'black', marginBottom: 2 }} color="inherit">Add Product</Button></Link>
+                    <br />
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/manageproducts`}><Button style={{ backgroundColor: 'skyblue', color: 'black', marginBottom: 2 }} color="inherit">Manage Products</Button></Link>
+                    <br />
+                    <Link style={{ textDecoration: 'none' }} to={`${url}/manageallorders`}><Button style={{ backgroundColor: 'skyblue', color: 'black', marginBottom: 2 }} color="inherit">Manage All Orders</Button></Link>
                 </Box>
             }
 
+            <Box>
+                <Button style={{ backgroundColor: 'goldenrod', color: 'black', marginBottom: 2, marginTop: '5rem' }} onClick={Logout}>Logout</Button>
+                <br />
+                <Link style={{ textDecoration: 'none' }} to="/"><Button style={{ backgroundColor: 'goldenrod', color: 'black', marginTop: 5 }} color="inherit">Home</Button></Link>
+            </Box>
         </div >
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
-
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -101,9 +110,7 @@ function Dashboard(props) {
                         <Typography variant="h6" noWrap component="div">
                             Dashboard
                         </Typography>
-                        <Typography variant="h6" noWrap component="div">
-                            <Button onClick={Logout}>Logout</Button>
-                        </Typography></div>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Box

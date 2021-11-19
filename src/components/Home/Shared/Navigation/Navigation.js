@@ -1,3 +1,4 @@
+import { Box } from '@mui/system';
 import React from 'react';
 import { Button, Container, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -10,21 +11,31 @@ const Navigation = () => {
 
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="/">Navbar with text</Navbar.Brand>
+                <Navbar.Brand href="/">Mountain Bike</Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <NavLink to="/dashboard">
-                        <Button>Dashboard</Button>
+                        <Button className="bg-black">Dashboard</Button>
                     </NavLink>
-                    <NavLink style={{ backgroundColor: 'none', color: 'white' }} to="/register">
-                        <Button>Register</Button>
+                    <NavLink to="/explore">
+                        <Button className="bg-black">Galary</Button>
                     </NavLink>
+
                     {
                         user.email ?
-                            <Button onClick={Logout}>Logout</Button>
-                            : <NavLink to="/login">
-                                <Button>Login</Button>
-                            </NavLink>
+
+
+                            <Button className="bg-black" onClick={Logout}>Logout</Button>
+
+                            :
+                            <Box>
+                                <NavLink to="/register">
+                                    <Button className="bg-black">Register</Button>
+                                </NavLink>
+                                <NavLink to="/login">
+                                    <Button className="bg-black">Login</Button>
+                                </NavLink>
+                            </Box>
                     }
 
                 </Navbar.Collapse>

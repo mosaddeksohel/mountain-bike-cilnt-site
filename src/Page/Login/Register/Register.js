@@ -66,12 +66,14 @@ const Register = () => {
                 />
                 <br />
                 <Button
-                    sx={{ width: '75%', m: 1 }}
+                    style={{ backgroundColor: 'goldenrod', width: '25%', marginBottom: 7, }}
                     type="submit"
                     variant="contained">Register</Button>
-                <Typography variant="p" gutterBottom component="div">
+                <Typography variant="p" gutterBottom component="div"
+                    sx={{ textAlign: 'center' }}>
+
                     Already Registered? Please<Link to="/login"><Button
-                        sx={{ width: '75%' }}
+                        style={{ backgroundColor: 'skyblue' }}
                         variant="contained">Login</Button>
                     </Link>
                 </Typography>
